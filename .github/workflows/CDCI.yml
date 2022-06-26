@@ -1,6 +1,8 @@
 variables:
   example: this is an example variable
 
+on: [push]
+
 stages:
   - stage1
   - stage2
