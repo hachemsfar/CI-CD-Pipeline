@@ -1,23 +1,19 @@
-variables:
-  example: this is an example variable
+on: 
+  push: 
+    branches: [ dev ] 
+    paths: 
+    - 'test.py' 
+ 
 
-on: [push]
-
-stages:
-  - stage1
-  - stage2
-
-build:
-  stage: stage1
-  script:
-    - echo "We are currently in stage 1"
-    - echo "These are the contents of test.py"
-    - cat test.py
-    - echo $example
-
-test:
-  stage: stage2
-  script:
-    - echo "We are currently in stage 2"
-    - echo "running python script"
-    - python3 test.py
+jobs: 
+   build: 
+    runs-on: ubuntu-latest 
+    steps: 
+    - uses: actions/checkout@v2 
+    - name: Set up Python 3.8 
+      uses: actions/setup-python@v2 
+      with: 
+        python-version: 3.8 
+    - name: Install dependencies 
+      run: | 
+        python test.py 
